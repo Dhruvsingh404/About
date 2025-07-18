@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me – Animated 3D Cartoon Website</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(120deg, #f5f9fe 60%, #e3ebfa 100%);
+      color: #222;
+      min-height: 100vh;
+    }
+    .animated-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+      background: linear-gradient(120deg, #7fd0ff 15%, #e8eaf6 50%, #adcefa 100%);
+    }
+    .cartoon-blob.left {
+      position: absolute; left: -60px; top: 12vh; z-index: 1; opacity: 0.88;
+      animation: blobWobble 7s infinite alternate ease-in-out;
+    }
+    .cartoon-blob.right {
+      position: absolute; right: -60px; bottom: 9vh; z-index: 1; opacity: 0.88;
+      transform: rotateY(180deg);
+      animation: blobWobble 9s infinite alternate-reverse ease-in-out;
+    }
+    @keyframes blobWobble {
+      0%   { transform: scale(1) rotate(0deg); }
+      33%  { transform: scale(1.07,0.96) rotate(-2deg);}
+      66%  { transform: scale(0.96,1.05) rotate(2deg);}
+      100% { transform: scale(1) rotate(0deg);}
+    }
+    .container {
+      max-width: 900px;
+      margin: 2.2rem auto;
+      padding: 2rem 1.2rem;
+      border-radius: 35px 25px 38px 28px / 30px 40px 22px 25px;
+      background: #fff;
+      box-shadow: 0 8px 32px rgba(80,120,236,0.18), 0 0 0 4px #fff inset;
+      border: 8px solid #3874e0;
+      outline: 4px solid #fcf7ef;
+      opacity: 0;
+      animation: fadeIn 1.1s 0.3s forwards;
+      z-index: 2;
+      position: relative;
+    }
+    @keyframes fadeIn { to { opacity: 1; } }
+    header {
+      background: #3874e0;
+      color: #fff;
+      padding: 2.5rem 1rem 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(56,116,224,0.10);
+      animation: headerPop 1s cubic-bezier(.53,.58,.59,1.49) 0.1s both;
+      z-index: 2;
+      position: relative;
+    }
+    @keyframes headerPop {
+      0% { transform: scale(0.96) translateY(-30px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    nav {
+      background: #222;
+      color: #fff;
+      padding: 0.7rem 0;
+      text-align: center;
+      z-index: 2;
+      position: relative;
+    }
+    nav a, .animated-link {
+      color: #fff;
+      margin: 0 1rem;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color 0.3s, border-bottom 0.3s;
+      cursor:pointer;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+    .animated-link:hover, nav a:hover {
+      color: #ff9800;
+      border-bottom: 2px solid #ff9800;
+    }
+    .profile-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+    }
+    .profile-pic {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      box-shadow: 0 10px 36px #2196f355, 0 0 0 8px #fcf7ef;
+      object-fit: cover;
+      border: 6px solid #f5f9fe;
+      transition: box-shadow 0.45s, transform 0.45s;
+      animation: floatPic 1.2s 0.4s both;
+      background: #fff;
+    }
+    .profile-pic:hover {
+      box-shadow: 0 10px 46px #3874e077, 0 0 0 14px #fcf7ef;
+      transform: scale(1.04) rotate(-3deg);
+    }
+    @keyframes floatPic {
+      0% { opacity: 0; transform: scale(0.94) }
+      100% { opacity: 1; transform: scale(1) }
+    }
+    .about-details {
+      flex: 1;
+      min-width: 210px;
+      animation: riseUp 0.95s 0.32s both;
+    }
+    @keyframes riseUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .about-list {
+      list-style:none;
+      padding:0;
+      margin:0 0 1.2rem 0;
+    }
+    .about-list li {
+      margin: 0.3rem 0;
+      font-size: 1.04em;
+    }
+    .about-list strong {
+      color: #3874e0;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+    }
+    .about-p {
+      margin-bottom: 1.3rem;
+      line-height: 1.65;
+      font-size: 1.03em;
+    }
+    .skills {
+      margin: 2.5rem 0 2rem 0;
+      animation: fadeInSkill 0.8s 0.6s both;
+      opacity: 0;
+    }
+    @keyframes fadeInSkill { to { opacity: 1;} }
+    .skill-label {
+      margin:.8em 0 0.4em 0;
+      font-size: 1.04em;
+      color: #3874e0;
+      font-weight: 500;
+    }
+    .bar-bg {
+      background: #f1f5fc;
+      border-radius: 20px;
+      height: 18px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px #81f0ff55, 0 0 3px #1673ce;
+      border: 2px solid #1673ce;
+      margin-bottom: 10px;
+    }
+    .bar-fill {
+      height: 18px;
+      background: linear-gradient(90deg,#5cafff 60%,#3874e0 100%);
+      width: 0;
+      border-radius: 20px;
+      transition: width 1.2s cubic-bezier(.53,.58,.29,1.15);
+      box-shadow: 0 2px 7px 0 #5cafff77;
+    }
+    .skills[data-ready="yes"] .bar-fill {
+      width: var(--pct, 0%);
+    }
+    .sticker {
+      position: absolute;
+      z-index: 3;
+      width: 60px;
+      opacity: 0.84;
+      pointer-events: none;
+      transition: transform 0.5s;
+    }
+    .sticker.star { left: 6vw; top: 9vh; animation: shineStar 6s infinite linear;}
+    .sticker.heart { right: 7vw; bottom: 10vh; animation: bounceHeart 5s infinite alternate;}
+    @keyframes shineStar {
+      0%,100%{transform: scale(1) rotate(-12deg);}
+      33%{transform: scale(1.08) rotate(0deg);}
+      66%{transform: scale(0.96) rotate(10deg);}
+    }
+    @keyframes bounceHeart {
+      0%,100%{transform: translateY(0) scale(1);}
+      50%{transform: translateY(-18px) scale(1.06);}
+    }
+    .socials {
+      margin: 1.2rem 0 0 0;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+    .social-link {
+      font-size: 2.1em;
+      color: #3874e0;
+      transition: color 0.32s, transform 0.32s;
+      text-decoration: none;
+      display: inline-block;
+      will-change: transform;
+      animation: popSocial 0.6s both;
+    }
+    .social-link:hover {
+      color: #0852a0;
+      transform: scale(1.15) rotate(-7deg);
+    }
+    @keyframes popSocial { from { opacity:0; transform: translateY(18px) scale(.93);} }
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      background: #222;
+      color: #fff;
+      margin-top: 2.5rem;
+      z-index: 2;
+      position: relative;
+      font-size: 1.02em;
+    }
+    ul { padding-left: 0; }
+    @media (max-width: 650px) {
+      .profile-row { flex-direction: column; text-align: center; }
+      .about-details { margin-top: 1.3rem; }
+      .cartoon-blob.left, .cartoon-blob.right { display: none;}
+      .container { border-radius: 20px; }
+      .sticker { width: 36px;}
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="animated-bg">
+    <!-- 3D Cartoon SVG Side Blobs -->
+    <svg class="cartoon-blob left" viewBox="0 0 160 400">
+      <ellipse cx="80" cy="200" rx="75" ry="170"
+            fill="url(#blobbyLeft)" stroke="#066bdb" stroke-width="7"/>
+      <defs>
+        <linearGradient id="blobbyLeft" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="10%" stop-color="#81f0ff"/>
+          <stop offset="95%" stop-color="#1673ce"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <svg class="cartoon-blob right" viewBox="0 0 160 400">
+      <ellipse cx="80" cy="200" rx="75" ry="170"
+            fill="url(#blobbyRight)" stroke="#b99cff" stroke-width="7"/>
+      <defs>
+        <linearGradient id="blobbyRight" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="10%" stop-color="#ffe1fd"/>
+          <stop offset="95%" stop-color="#adcefa"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <!-- Cartoon Stickers -->
+    <svg class="sticker star" viewBox="0 0 64 64">
+      <polygon points="32,4 39,26 62,26 42,39 49,61 32,48 15,61 22,39 2,26 25,26"
+        fill="#ffe066" stroke="#ebcb0b" stroke-width="4" />
+    </svg>
+    <svg class="sticker heart" viewBox="0 0 64 64">
+      <path d="M32 58s-26-17.96-26-34C6 12.79 17.23 4.85 32 20.42C46.77 4.85 58 12.79 58 24c0 16.04-26 34-26 34z"
+        fill="#ff6f91" stroke="#e54368" stroke-width="3" />
+    </svg>
+  </div>
+  <header>
+    <h1>About Me Website</h1>
+    <div style="font-size:1.15em;opacity:.92;margin-top:0.4em;">Hi! Browse my profile or contact me easily!</div>
+  </header>
+  <nav>
+    <a class="animated-link" onclick="showSection('welcome-section')">Home</a>
+    <a class="animated-link" onclick="showSection('about-section')">About</a>
+    <a class="animated-link" onclick="showSection('contact-section')">Contact</a>
+  </nav>
+  <div class="container">
+    <!-- Welcome Section -->
+    <section id="welcome-section">
+      <h2>Hii, welcome to my website 👋</h2>
+      <p style="font-size:1.12em;">Please use the navigation above to learn more about me or contact me!</p>
+    </section>
+    <!-- About Section -->
+    <section id="about-section" style="display:none;">
+      <section class="profile-row">
+        <img src="profile.jpg" alt="Your Name" class="profile-pic">
+        <div class="about-details">
+          <ul class="about-list">
+            <li><strong>Name:</strong> Dhruv Singh</li>
+            <li><strong>Profession:</strong> Full Stack Developer</li>
+            <li><strong>Location:</strong> Jharkhand, India</li>
+            <li><strong>Email:</strong> dhruv20259@gmail.com</li>
+            <li><strong>Interests:</strong> UI Design, Cycling, Code Challenges</li>
+          </ul>
+          <p class="about-p">
+            I'm passionate about building interactive, modern web apps and love learning new technologies every day. Let's connect!
+          </p>
+        </div>
+      </section>
+      <div class="skills" id="skills">
+        <h2 style="color:#3874e0;letter-spacing:0.02em;">My Skills</h2>
+        <div>
+          <div class="skill-label">Java</div>
+          <div class="bar-bg"><div class="bar-fill" style="--pct: 87%;"></div></div>
+        </div>
+        <div>
+          <div class="skill-label">Spring Boot</div>
+          <div class="bar-bg"><div class="bar-fill" style="--pct: 80%;"></div></div>
+        </div>
+        <div>
+          <div class="skill-label">React.js</div>
+          <div class="bar-bg"><div class="bar-fill" style="--pct: 80%;"></div></div>
+        </div>
+        <div>
+          <div class="skill-label">UI/UX Design</div>
+          <div class="bar-bg"><div class="bar-fill" style="--pct: 70%;"></div></div>
+        </div>
+        <div>
+          <div class="skill-label">SQL &amp; Databases</div>
+          <div class="bar-bg"><div class="bar-fill" style="--pct: 88%;"></div></div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact-section" style="display:none;">
+      <h2 style="color:#3874e0;letter-spacing:0.02em;">Contact Me</h2>
+      <ul class="about-list">
+        <li><strong>Email:</strong> dhruv20259@gmail.com</li>
+        <li><strong>Location:</strong> Mumbai, India</li>
+      </ul>
+      <div class="socials">
+        <a class="social-link" title="LinkedIn" href="https://linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a class="social-link" title="GitHub" href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
+        <a class="social-link" title="WhatsApp" href="https://wa.me/917282026859?text=Hello!%20I%20visited%20your%20website" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </section>
+  </div>
+  <footer>
+    &copy; 2025 Dhruv Singh. All rights reserved.
+  </footer>
+  <script>
+    function showSection(sectionId) {
+      document.getElementById('welcome-section').style.display = 'none';
+      document.getElementById('about-section').style.display = 'none';
+      document.getElementById('contact-section').style.display = 'none';
+      document.getElementById(sectionId).style.display = 'block';
+      if (sectionId === 'about-section') {
+        setTimeout(() => {
+          document.querySelector('.skills').setAttribute('data-ready', 'yes');
+        }, 350);
+      } else {
+        document.querySelector('.skills').setAttribute('data-ready', 'no');
+      }
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      showSection('welcome-section');
+    });
+  </script>
+</body>
+</html>
